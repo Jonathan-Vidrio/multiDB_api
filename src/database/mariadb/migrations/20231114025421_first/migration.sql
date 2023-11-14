@@ -8,6 +8,7 @@ CREATE TABLE `Student` (
     `semester` INTEGER NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `phone` VARCHAR(191) NOT NULL,
+    `status` INTEGER NOT NULL,
 
     UNIQUE INDEX `Student_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -22,6 +23,7 @@ CREATE TABLE `Teacher` (
     `secondLastName` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `phone` VARCHAR(191) NOT NULL,
+    `status` INTEGER NOT NULL,
 
     UNIQUE INDEX `Teacher_teacherId_key`(`teacherId`),
     UNIQUE INDEX `Teacher_email_key`(`email`),

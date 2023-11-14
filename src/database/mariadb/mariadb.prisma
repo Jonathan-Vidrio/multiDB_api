@@ -16,6 +16,7 @@ model Student {
   semester       Int
   email          String @unique
   phone          String
+  status         Int
 }
 
 model Teacher {
@@ -26,4 +27,5 @@ model Teacher {
   secondLastName String
   email          String @unique
   phone          String
+  status         Int
 }

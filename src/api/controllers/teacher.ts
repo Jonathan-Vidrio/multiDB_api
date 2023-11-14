@@ -10,6 +10,15 @@ const getTeachers = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const getDisabledTeachers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await teacherService.getDisabledTeachers();
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const getTeacher = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = parseInt(req.params.id);
@@ -41,6 +50,26 @@ const putTeacher = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const enableTeacher = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const id = parseInt(req.params.id);
+        const result = await teacherService.enableTeacher(id);
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+const disableTeacher = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const id = parseInt(req.params.id);
+        const result = await teacherService.disableTeacher(id);
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const deleteTeacher = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = parseInt(req.params.id);
@@ -53,8 +82,11 @@ const deleteTeacher = async (req: Request, res: Response, next: NextFunction) =>
 
 export {
     getTeachers,
+    getDisabledTeachers,
     getTeacher,
     postTeacher,
     putTeacher,
+    enableTeacher,
+    disableTeacher,
     deleteTeacher
 }

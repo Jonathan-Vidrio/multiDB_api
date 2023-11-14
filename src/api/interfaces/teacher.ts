@@ -6,6 +6,7 @@ interface ITeacher {
     secondLastName?: string,
     email: string,
     phone: string,
+    status?: number,
 }
 
 export default ITeacher;

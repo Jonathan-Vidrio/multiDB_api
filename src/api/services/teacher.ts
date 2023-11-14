@@ -4,7 +4,20 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const getTeachers = async () => {
-    const result = await prisma.teacher.findMany();
+    const result = await prisma.teacher.findMany({
+        where: {
+            status: 1
+        }
+    });
+    return result;
+}
+
+const getDisabledTeachers = async () => {
+    const result = await prisma.teacher.findMany({
+        where: {
+            status: 0
+        }
+    });
     return result;
 }
 
@@ -26,7 +39,8 @@ const createTeacher = async (teacher: ITeacher) => {
             firstLastName: teacher.firstLastName,
             secondLastName: teacher.secondLastName || "",
             email: teacher.email,
-            phone: teacher.phone
+            phone: teacher.phone,
+            status: teacher.status || 1
         }
     });
     return result;
@@ -42,6 +56,30 @@ const updateTeacher = async (id: number, teacher: ITeacher) => {
     return result;
 }
 
+const enableTeacher = async (id: number) => {
+    const result = await prisma.teacher.update({
+        where: {
+            id: id
+        },
+        data: {
+            status: 1
+        }
+    });
+    return result;
+}
+
+const disableTeacher = async (id: number) => {
+    const result = await prisma.teacher.update({
+        where: {
+            id: id
+        },
+        data: {
+            status: 0
+        }
+    });
+    return result;
+}
+
 const deleteTeacher = async (id: number) => {
     const result = await prisma.teacher.delete({
         where: {
@@ -53,8 +91,11 @@ const deleteTeacher = async (id: number) => {
 
 export {
     getTeachers,
+    getDisabledTeachers,
     getTeacher,
     createTeacher,
     updateTeacher,
+    enableTeacher,
+    disableTeacher,
     deleteTeacher
 }

@@ -4,7 +4,20 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const getStudents = async () => {
-    const result = await prisma.student.findMany();
+    const result = await prisma.student.findMany({
+        where: {
+            status: 1
+        }
+    });
+    return result;
+}
+
+const getDisabledStudents = async () => {
+    const result = await prisma.student.findMany({
+        where: {
+            status: 0
+        }
+    });
     return result;
 }
 
@@ -27,7 +40,8 @@ const createStudent = async (student: IStudent) => {
             career: student.career,
             semester: student.semester,
             email: student.email,
-            phone: student.phone
+            phone: student.phone,
+            status: student.status || 1
         }
     });
     return result;
@@ -43,6 +57,30 @@ const updateStudent = async (id: number, student: IStudent) => {
     return result;
 }
 
+const enableStudent = async (id: number) => {
+    const result = await prisma.student.update({
+        where: {
+            id: id
+        },
+        data: {
+            status: 1
+        }
+    });
+    return result;
+}
+
+const disableStudent = async (id: number) => {
+    const result = await prisma.student.update({
+        where: {
+            id: id
+        },
+        data: {
+            status: 0
+        }
+    });
+    return result;
+}
+
 const deleteStudent = async (id: number) => {
     const result = await prisma.student.delete({
         where: {
@@ -54,8 +92,11 @@ const deleteStudent = async (id: number) => {
 
 export {
     getStudents,
+    getDisabledStudents,
     getStudent,
     createStudent,
     updateStudent,
+    enableStudent,
+    disableStudent,
     deleteStudent
 }

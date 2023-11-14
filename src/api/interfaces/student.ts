@@ -7,6 +7,7 @@ interface IStudent {
     semester: number,
     email: string,
     phone: string,
+    status?: number,
 }
 
 export default IStudent;

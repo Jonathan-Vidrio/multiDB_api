@@ -10,6 +10,15 @@ const getStudents = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const getDisabledStudents = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await studentService.getDisabledStudents();
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const getStudent = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = parseInt(req.params.id);
@@ -41,6 +50,26 @@ const putStudent = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const enableStudent = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const id = parseInt(req.params.id);
+        const result = await studentService.enableStudent(id);
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+const disableStudent = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const id = parseInt(req.params.id);
+        const result = await studentService.disableStudent(id);
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
 const deleteStudent = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = parseInt(req.params.id);
@@ -53,8 +82,11 @@ const deleteStudent = async (req: Request, res: Response, next: NextFunction) =>
 
 export {
     getStudents,
+    getDisabledStudents,
     getStudent,
     postStudent,
     putStudent,
+    enableStudent,
+    disableStudent,
     deleteStudent
 }
