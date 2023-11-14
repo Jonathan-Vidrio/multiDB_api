@@ -7,8 +7,8 @@ const router = Router();
 readdirSync(PATH_ROUTER).forEach((file) => {
     const fileName = file.split('.')[0];
     if (fileName !== 'index') {
-        const routerFile = require(`./${fileName}`);
-        router.use(`/${fileName}`, routerFile.default);
+        console.log(fileName);
+        router.use(`/${fileName}`, require(`./${fileName}`).default);
     }
 });
 
