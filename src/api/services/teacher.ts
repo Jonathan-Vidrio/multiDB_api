@@ -1,4 +1,4 @@
-import ITeacher from "../interfaces/teacher.interface";
+import ITeacher from "../interfaces/teacher";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

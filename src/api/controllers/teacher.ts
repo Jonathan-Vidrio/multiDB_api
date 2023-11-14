@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import * as teacherService from "../services/teacher.service";
+import * as teacherService from "../services/teacher";
 
 const getTeachers = async (req: Request, res: Response, next: NextFunction) => {
     try {
