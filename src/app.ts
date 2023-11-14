@@ -1,13 +1,16 @@
 import express from 'express';
 import cors from 'cors';
 
-import { PORT } from "./utils/constants";
+import router from "./api/routes";
+import errorHandler from "./api/middlewares/error.handler";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.use('/api', router);
+
+app.use(errorHandler);
+
+export default app;
