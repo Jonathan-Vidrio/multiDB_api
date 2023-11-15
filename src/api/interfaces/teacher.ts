@@ -10,5 +10,5 @@ interface ITeacher {
 }
 
 export {
-    ITeacher;
+    ITeacher
 }
