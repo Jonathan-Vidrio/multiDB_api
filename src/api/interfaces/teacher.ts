@@ -9,4 +9,6 @@ interface ITeacher {
     status?: number,
 }
 
-export default ITeacher;
+export {
+    ITeacher;
+}
