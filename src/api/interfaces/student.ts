@@ -10,4 +10,6 @@ interface IStudent {
     status?: number,
 }
 
-export default IStudent;
+export {
+    IStudent
+}
